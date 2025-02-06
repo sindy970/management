@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model exel_file {
+  seq            BigInt    @id @default(autoincrement())
+  original_name  String?   @db.VarChar
+  name           String?   @db.VarChar
+  size           String?   @db.VarChar
+  mime_type      String?   @db.VarChar
+  classification String?   @db.VarChar
+  delete_yn      String?   @default("N") @db.VarChar
+  create_user    BigInt?
+  create_date    DateTime  @default(now()) @db.Timestamptz(6)
+  update_user    BigInt?
+  update_date    DateTime? @updatedAt @db.Timestamptz(6)
+  delete_user    BigInt?
+  delete_date    DateTime? @db.Timestamptz(6)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model information {
+  seq               BigInt    @id @default(autoincrement())
+  name              String?   @db.VarChar
+  tel               String?   @db.VarChar
+  birth             String?   @db.VarChar
+  gubun             String?   @db.VarChar
+  distribution_yn   String?   @default("N") @db.VarChar
+  distribution_user BigInt?
+  delete_yn         String?   @db.VarChar
+  create_user       BigInt?
+  create_date       DateTime  @default(now()) @db.Timestamptz(6)
+  update_user       BigInt?
+  update_date       DateTime? @updatedAt @db.Timestamptz(6)
+  delete_user       BigInt?
+  delete_date       DateTime? @db.Timestamptz(6)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model memo {
+  seq             BigInt    @id @default(autoincrement())
+  information_seq BigInt?
+  content         String?   @db.VarChar
+  delete_yn       String?   @default("N") @db.VarChar
+  create_user     BigInt?
+  create_date     DateTime  @default(now()) @db.Timestamptz(6)
+  update_user     BigInt?
+  update_date     DateTime? @updatedAt @db.Timestamptz(6)
+  delete_user     BigInt?
+  delete_date     DateTime? @db.Timestamptz(6)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model user {
+  seq         BigInt    @id @default(autoincrement())
+  id          String?   @db.VarChar
+  password    String?   @db.VarChar
+  name        String?   @db.VarChar
+  auth        Int?
+  use_yn      String?   @default("Y") @db.VarChar
+  delete_yn   String?   @default("N") @db.VarChar
+  create_user BigInt?
+  create_date DateTime  @default(now()) @db.Timestamptz(6)
+  update_user BigInt?
+  update_date DateTime? @updatedAt @db.Timestamptz(6)
+  delete_user BigInt?
+  delete_date DateTime? @db.Timestamptz(6)
+}
