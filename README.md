@@ -1,6 +1,8 @@
 ## 암호화 방식
 - crypto-js (AES 방식)
-    - 설치 명령어 : npm install --save-dev @types/crypto-js
+    - 설치 명령어
+      -      npm install --save-dev @types/crypto-js
+      -      npm install crypto-js
     - 
 
 <a href="https://demo-nextjs-with-supabase.vercel.app/">

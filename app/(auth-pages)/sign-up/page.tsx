@@ -1,4 +1,6 @@
-import { signUpAction } from "@/app/actions";
+// import { signUpAction } from "@/app/actions";
+
+import { signUp } from "@/app/api/post/user/SignUp"
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
@@ -29,8 +31,8 @@ export default async function Signup(props: {
           </Link>
         </p>
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-          <Label htmlFor="email">Email</Label>
-          <Input name="email" placeholder="you@example.com" required />
+          <Label htmlFor="id">ID</Label>
+          <Input name="id" placeholder="영문, 숫자 8자 이상 입력해주세요" required />
           <Label htmlFor="password">Password</Label>
           <Input
             type="password"
@@ -39,7 +41,10 @@ export default async function Signup(props: {
             minLength={6}
             required
           />
-          <SubmitButton formAction={signUpAction} pendingText="Signing up...">
+          <Label htmlFor="name">이름</Label>
+          <Input name="name" placeholder="이름" required/>
+
+          <SubmitButton formAction={signUp} pendingText="Signing up...">
             Sign up
           </SubmitButton>
           <FormMessage message={searchParams} />
