@@ -24,3 +24,20 @@ export async function POST(request: Request) {
     const { password, ...result } = users
     return new Response(serializeBigInt(users))
 }
+
+export async function GET(request: Request) {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    const user = await prisma.user.findFirst({
+        where: {
+            id: id,
+        },
+    })
+
+    if(!user){
+        return new Response("Ok",{status : 200 , message : "Ok"});
+    } else {
+        return new Response("Already" ,{status : 400, message : "Already exists."});
+    }
+}
